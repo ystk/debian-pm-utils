@@ -1,0 +1,36 @@
+#!/usr/bin/make -f
+  
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+
+configure/pm-utils::
+	# Hack to not build some stuff
+	touch src/pm-pmu.o src/pm-reset-swap.o
+	touch src/pm-pmu src/pm-reset-swap
+
+pre-build::
+	# Enforce that man pages are regenerated
+	rm -f man/pm-powersave.8
+	rm -f man/pm-action.8
+	rm -f man/pm-is-supported.1
+
+binary-install/pm-utils::
+	# We depend on powermgmt-base to provide on_ac_power. 
+	# This way we don't have to conflict with this package.
+	rm -f debian/pm-utils/usr/bin/on_ac_power
+	rm -f debian/pm-utils/usr/bin/import-fdi-quirkdb
+	rm -f debian/pm-utils/usr/share/man/man1/on_ac_power.1
+	# Remove tools/hooks that are not suitable for Debian.
+	rm -f debian/pm-utils/usr/lib/pm-utils/sleep.d/01grub
+	rm -f debian/pm-utils/usr/lib/pm-utils/bin/pm-reset-swap
+	rm -f debian/pm-utils/usr/lib/pm-utils/bin/pm-pmu
+	rm -f debian/pm-utils/usr/share/man/man8/pm-pmu.8
+
+	chmod -x debian/pm-utils/usr/lib/pm-utils/defaults
+
+	install -D -m 755 debian/kernel-postinst-hibernate-stamp debian/pm-utils/etc/kernel/postinst.d/pm-utils
+	install -D -m 755 debian/no-hibernate-on-kernel-update debian/pm-utils/usr/lib/pm-utils/sleep.d/000kernel-change
+
+	# install quirks db
+	cp -r video-quirks debian/pm-utils/usr/lib/pm-utils/

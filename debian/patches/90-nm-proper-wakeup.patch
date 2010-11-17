@@ -1,0 +1,42 @@
+---
+ pm/sleep.d/55NetworkManager |    8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+Index: pm-utils-1.2.2.4/pm/sleep.d/55NetworkManager
+===================================================================
+--- pm-utils-1.2.2.4.orig/pm/sleep.d/55NetworkManager
++++ pm-utils-1.2.2.4/pm/sleep.d/55NetworkManager
+@@ -6,29 +6,29 @@
+ #       not break established connections.  Apple can do this, and it is
+ #       rather nifty.
+ 
+ . "${PM_FUNCTIONS}"
+ 
+ suspend_nm()
+ {
+ 	# Tell NetworkManager to shut down networking
+-	dbus_send --system                         \
++	dbus_send --print-reply --system                         \
+ 		--dest=org.freedesktop.NetworkManager  \
+ 		/org/freedesktop/NetworkManager        \
+-		org.freedesktop.NetworkManager.sleep
++		org.freedesktop.NetworkManager.sleep 2>&1 > /dev/null
+ }
+ 
+ resume_nm()
+ {
+ 	# Wake up NetworkManager and make it do a new connection
+-	dbus_send --system                        \
++	dbus_send --print-reply --system                        \
+ 		--dest=org.freedesktop.NetworkManager \
+ 		/org/freedesktop/NetworkManager       \
+-		org.freedesktop.NetworkManager.wake
++		org.freedesktop.NetworkManager.wake 2>&1 > /dev/null
+ }
+ 
+ case "$1" in
+ 	hibernate|suspend)
+ 		suspend_nm
+ 		;;
+ 	thaw|resume)
+ 		resume_nm

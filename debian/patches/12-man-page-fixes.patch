@@ -1,0 +1,212 @@
+Index: pm-utils/man/pm-action.xml
+===================================================================
+--- pm-utils.orig/man/pm-action.xml	2010-03-18 09:32:45.758509836 +0100
++++ pm-utils/man/pm-action.xml	2010-03-19 02:55:16.862011399 +0100
+@@ -104,7 +104,7 @@
+       For some options external programs are needed.
+     </para>
+     <para>
+-      These commands will usually be called by <command>DeviceKit-power</command>
++      These commands will usually be called by <command>UPower</command>
+       or <command>hald</command> when triggered to do so by a program
+       in a desktop session such as <command>gnome-power-manager</command>. 
+       Calling them from the command line is also possible, but it is not 
+@@ -144,7 +144,7 @@
+ 	<listitem>
+ 	  <para>
+ 	    Hybrid-suspend is the process where the system does everything it
+-	    needs to hibernate, suspends instead of shutting down. This means that 
++	    needs to hibernate, but suspends instead of shutting down. This means that
+ 	    your computer can wake up quicker than for normal hibernation 
+ 	    if you do not run out of power, and you can resume even if you run out of power.
+ 	    s2both(8) is an hybrid-suspend implementation.
+@@ -166,9 +166,9 @@
+     </para>
+     <para>
+       If <command>pm-suspend</command>, <command>pm-hibernate</command>,
+-      or <command>pm-suspend-hybrid</command> is invoked without any
++      or <command>pm-suspend-hybrid</command> are invoked without any
+       commandline parameters, they will try to grab the correct quirks
+-      from HAL if it is installed.
++      from the internal quirk database.
+     </para>
+     <variablelist>
+       <!-- Use the variablelist.term.separator and the
+@@ -224,7 +224,7 @@
+           <para>
+             This option initializes the video card into a VGA text mode, and
+             then uses the BIOS to set the video mode. On some systems S3 BIOS
+-            only initializes the video bios to text mode, and so both S3 BIOS
++            only initializes the video BIOS to text mode, and so both S3 BIOS
+             and S3 MODE are needed.
+           </para>
+         </listitem>
+@@ -288,7 +288,7 @@
+ 	    <filename>/var/cache/pm-utils/last_known_working.quirkdb</filename>.
+ 	    This parameter will only save the actual quirks that were
+ 	    used to successfully suspend/resume a system, and will be
+-	    specific to the exact configuration of that sustem, including
++	    specific to the exact configuration of that system, including
+ 	    the video hardware, video driver, and whether or not kernel
+ 	    modesetting was used. If the system configuration changes, like after
+ 	    a kernel upgrade, this file will be overwritten.
+@@ -324,16 +324,16 @@
+ 	<term><filename>/usr/lib/pm-utils/sleep.d</filename></term>
+ 	<listitem>
+ 	  <para>
+-	    Programs in these directories (we call them hooks) are 
++	    Programs in these directories (called hooks) are
+ 	    combined and executed in C sort order before suspend and 
+ 	    hibernate with as argument 'suspend' or 'hibernate'.
+-	    Afterwards they are called  in reverse order with
++	    Afterwards they are called in reverse order with
+ 	    argument 'resume' and 'thaw' respectively.
+ 	    If both directories contain a similar named file,
+-	    the one in /etc/pm/sleep.d will get preference. It
++	    the one in <filename>/etc/pm/sleep.d</filename> will get preference. It
+ 	    is possible to disable a hook in the distribution
+ 	    directory by putting a non-executable file in 
+-	    /etc/pm/sleep.d, or by adding it to the HOOK_BLACKLIST 
++	    <filename>/etc/pm/sleep.d</filename>, or by adding it to the HOOK_BLACKLIST
+ 	    configuration variable.
+           </para>
+ 	</listitem>
+@@ -395,7 +395,7 @@
+     <title>CONFIGURATION VARIABLES</title>
+     <para>
+       Configuration variables defined by pm-utils. These can be set 
+-      in any file in /etc/pm/config.d
++      in any file in <filename>/etc/pm/config.d/</filename>.
+     </para>
+     
+     <variablelist>
+@@ -499,7 +499,7 @@
+ 	    If your system clock drifts across a suspend/resume or
+ 	    hibernate/thaw cycle, you should set this to true.
+ 	    This will cause pm-utils to synchronize the system clock
+-	    whenever we go through a sleep/wake cycle at the expense of 
++	    whenever going through a sleep/wake cycle at the expense of
+ 	    making suspend/resume take longer.
+           </para>
+ 	</listitem>
+@@ -522,10 +522,10 @@
+     <title>RETURN VALUES</title>
+     <para>
+       Return values less than 128 mean that pm-action failed before trying to
+-      put the system in the requested power saving state.  A return value
+-      of 128 means that we tried to put the machine in the requested power state
+-      but failed.  A return value greater than 128 means we encountered an error
+-      and we also failed to enter the requested power saving state.
++      put the system in the requested power saving state. A return value
++      of 128 means that pm-action tried to put the machine in the requested power state
++      but failed. A return value greater than 128 means pm-action encountered an error
++      and also failed to enter the requested power saving state.
+     </para>
+   </refsect1>
+   <refsect1 id="debugging">
+Index: pm-utils/man/pm-is-supported.xml
+===================================================================
+--- pm-utils.orig/man/pm-is-supported.xml	2010-03-18 09:33:05.266506484 +0100
++++ pm-utils/man/pm-is-supported.xml	2010-03-19 02:22:07.094013304 +0100
+@@ -89,7 +89,7 @@
+     <para>
+       The intended purpose of <command>&dhpackage;</command> is to
+       find out which power management modes are supported by the 
+-      system. hald(8) will call it to do just that. (Note that DeviceKit-power
++      system. hald(8) will call it to do just that. (Note that UPower
+       does not use this.)
+     </para>
+   </refsect1>
+@@ -104,7 +104,7 @@
+ 	<term><option>--suspend</option></term>
+ 	<listitem>
+ 	  <para>
+-	    Is suspend supported? Suspend is a state where
++	    Test whether suspend is supported. Suspend is a state where
+ 	    most devices are shutdown, except for RAM. This
+ 	    state still draws power.
+ 	  </para>
+@@ -114,7 +114,7 @@
+ 	<term><option>--hibernate</option></term>
+         <listitem>
+ 	  <para>
+-	    Is hibernate supported? During hibernate the state of the
++	    Test whether hibernate is supported. During hibernate the state of the
+ 	    system is saved to disk, the system is fully powered off.
+ 	  </para>
+ 	</listitem>
+@@ -123,7 +123,7 @@
+ 	<term><option>--suspend-hybrid</option></term>
+ 	<listitem>
+ 	  <para>
+-	    Is hybrid-suspend supported? Hybrid-suspend is the process
++	    Test whether hybrid-suspend is supported. Hybrid-suspend is the process
+ 	    where first the state of the system is saved to disk 
+ 	    -- just like with hibernate -- but instead of poweroff, the 
+ 	    system goes in suspend state, which means it can wakeup 
+@@ -161,10 +161,6 @@
+     <!-- In alpabetical order. -->
+     <para>
+       <citerefentry>
+-	<refentrytitle>DeviceKit-power</refentrytitle>
+-	<manvolnum>7</manvolnum>
+-      </citerefentry>,
+-      <citerefentry>
+ 	<refentrytitle>hald</refentrytitle>
+ 	<manvolnum>8</manvolnum>
+       </citerefentry>,
+@@ -176,6 +172,10 @@
+ 	<refentrytitle>s2both</refentrytitle>
+ 	<manvolnum>8</manvolnum>
+       </citerefentry>
++      <citerefentry>
++	<refentrytitle>UPower</refentrytitle>
++	<manvolnum>7</manvolnum>
++      </citerefentry>,
+     </para>
+   </refsect1>
+ </refentry>
+Index: pm-utils/man/pm-powersave.xml
+===================================================================
+--- pm-utils.orig/man/pm-powersave.xml	2010-03-18 09:33:05.450496147 +0100
++++ pm-utils/man/pm-powersave.xml	2010-03-19 02:57:20.290003347 +0100
+@@ -86,7 +86,7 @@
+       command.
+     </para>
+     <para>
+-      <command>&dhpackage;</command> can be used to set your system into
++      <command>&dhpackage;</command> can be used to put your system into
+       low power mode.
+     </para>
+       </refsect1>
+@@ -101,7 +101,7 @@
+         <term><option>true</option></term>
+         <listitem>
+ 	  <para>
+-	    Set the computer into low power mode to reduce energy consumption
++	    Put the computer into low power mode to reduce energy consumption
+ 	    and extend your laptop's battery life.
+ 	  </para>
+         </listitem>
+@@ -128,16 +128,16 @@
+ 	    When you run <command>pm-powersave</command> it combines the
+ 	    scripts in these two directories and executes them in sorted order.
+ 	    If both directories contain a script with the same name, the one in
+-	    /etc/pm/power.d/ has a higher precedence and only
++	    <filename>/etc/pm/power.d/</filename> has a higher precedence and only
+ 	    this one will be executed.
+ 	  </para>
+ 	  <para>
+-	    Therefore to disable a script from /usr/lib/pm-utils/power.d/ 
+-	    simply create an empty file in /etc/pm/power.d/ with the same
+-	    name and without the execute bit set.
++	    Therefore to disable a script from <filename>/usr/lib/pm-utils/power.d/</filename>
++	    simply create an empty file in <filename>/etc/pm/power.d/</filename> with the same
++	    name and without the executable bit set.
+ 	  </para>
+         </listitem>
+-      </varlistentry>    
++      </varlistentry>
+     </variablelist>
+   </refsect1>
+ 

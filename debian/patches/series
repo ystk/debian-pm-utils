@@ -1,0 +1,10 @@
+02-logging-append.patch
+05-inspiron-8600-ati-quirk.patch
+06-quirk-lkw-cache.patch
+08-fix-lock-file-handling.patch
+09-document-add-drop-parameters.patch
+11-handle-on_ac_power-255-return-code.patch
+12-man-page-fixes.patch
+25-pmu.patch
+80-service.patch
+90-nm-proper-wakeup.patch

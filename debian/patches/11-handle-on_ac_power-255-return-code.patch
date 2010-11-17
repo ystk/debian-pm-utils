@@ -1,0 +1,29 @@
+Description: Handle on_ac_power 255 return code
+ As we are using the on_ac_power utility from powermgmt-base, which returns
+ 255 when it can't determine the AC power state, assume we have a desktop
+ system in such a case. This behaviour is compatible with the pm-utils upstream
+ implementation of on_ac_power.
+Debian-Bug: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=572060
+Author: Michael Biebl <biebl@debian.org>
+Index: pm-utils/src/pm-powersave.in
+===================================================================
+--- pm-utils.orig/src/pm-powersave.in	2010-03-18 05:47:09.338848258 +0100
++++ pm-utils/src/pm-powersave.in	2010-03-18 09:01:57.806493633 +0100
+@@ -44,11 +44,12 @@
+ elif [ ! "$1" ]; then
+     # no arg?  Guess!
+     init_logfile "${PM_LOGFILE}"
+-    if on_ac_power; then
+-	run_hooks power false;
+-    else
+-	run_hooks power true;
+-    fi
++    on_ac_power
++    case $? in
++	# If on_ac_power can't determine AC power state (255), assume it's a desktop.
++	0|255) run_hooks power false ;;
++	1) run_hooks power true ;;
++    esac
+ else
+     echo "Argument needs to be true or false" >&2
+     exit 1

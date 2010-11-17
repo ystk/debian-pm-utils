@@ -1,0 +1,19 @@
+Source: pm-utils
+Section: admin
+Priority: optional
+Maintainer: Tim Dijkstra <tim@famdijkstra.org>
+Uploaders: Michael Biebl <biebl@debian.org>, Martin Pitt <mpitt@debian.org>
+Build-Depends: cdbs, debhelper (>= 7), xmlto, quilt
+Standards-Version: 3.9.1
+Vcs-Git: git://git.debian.org/git/collab-maint/pm-utils.git
+Vcs-Browser: http://git.debian.org/?p=collab-maint/pm-utils.git;a=summary
+Homepage: http://pm-utils.freedesktop.org/
+
+Package: pm-utils
+Architecture: all
+Depends: ${misc:Depends}, powermgmt-base, kbd | console-tools
+Recommends: vbetool, radeontool, procps
+Suggests: cpufrequtils
+Description: utilities and scripts for power management
+ This package provides simple shell command line tools to suspend and
+ hibernate your computer.
