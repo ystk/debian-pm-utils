@@ -30,7 +30,7 @@ Index: pm-utils/man/pm-action.xml
 +	    <filename>/var/cache/pm-utils/last_known_working.quirkdb</filename>.
 +	    This parameter will only save the actual quirks that were
 +	    used to successfully suspend/resume a system, and will be
- 	    specific to the exact configuration of that sustem, including
+ 	    specific to the exact configuration of that system, including
  	    the video hardware, video driver, and whether or not kernel
 -	    modesetting was used.
 +	    modesetting was used. If the system configuration changes, like after

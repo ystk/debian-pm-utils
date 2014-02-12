@@ -74,13 +74,11 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
-BINDIR = @BINDIR@
 CC = @CC@
 CCDEPMODE = @CCDEPMODE@
 CFLAGS = @CFLAGS@
 CPPFLAGS = @CPPFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DATADIR = @DATADIR@
 DEFS = @DEFS@
 DEPDIR = @DEPDIR@
 ECHO_C = @ECHO_C@
@@ -108,11 +106,9 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
-SBINDIR = @SBINDIR@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
-SYSCONFDIR = @SYSCONFDIR@
 VERSION = @VERSION@
 XMLTO = @XMLTO@
 abs_builddir = @abs_builddir@
@@ -159,7 +155,18 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 powerdir = $(libdir)/pm-utils/power.d
 power_SCRIPTS = \
-	sched-powersave
+	sched-powersave		\
+	harddrive		\
+	laptop-mode		\
+	xfs_buffer		\
+	readahead		\
+	intel-audio-powersave	\
+	wireless 		\
+	journal-commit		\
+	disable_wol		\
+	pcie_aspm		\
+	sata_alpm		\
+	hal-cd-polling
 
 EXTRA_DIST = $(power_SCRIPTS)
 all: all-am

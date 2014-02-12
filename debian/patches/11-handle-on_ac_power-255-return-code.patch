@@ -7,23 +7,26 @@ Debian-Bug: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=572060
 Author: Michael Biebl <biebl@debian.org>
 Index: pm-utils/src/pm-powersave.in
 ===================================================================
---- pm-utils.orig/src/pm-powersave.in	2010-03-18 05:47:09.338848258 +0100
-+++ pm-utils/src/pm-powersave.in	2010-03-18 09:01:57.806493633 +0100
-@@ -44,11 +44,12 @@
- elif [ ! "$1" ]; then
-     # no arg?  Guess!
+--- pm-utils.orig/src/pm-powersave.in	2010-06-18 08:14:29.000000000 +0200
++++ pm-utils/src/pm-powersave.in	2010-06-18 16:10:05.608067653 +0200
+@@ -65,10 +65,19 @@
      init_logfile "${PM_LOGFILE}"
--    if on_ac_power; then
--	run_hooks power false;
--    else
--	run_hooks power true;
--    fi
+ }
+ 
++_on_ac_power() {
 +    on_ac_power
 +    case $? in
-+	# If on_ac_power can't determine AC power state (255), assume it's a desktop.
-+	0|255) run_hooks power false ;;
-+	1) run_hooks power true ;;
++        # If on_ac_power can't determine AC power state (255), assume it's a desktop.
++        0|255) return 0 ;;
++        1) return 1 ;;
 +    esac
- else
-     echo "Argument needs to be true or false" >&2
-     exit 1
++}
++
+ case $1 in
+     true|battery) lock_and_load && run_hooks power true;;
+     false|ac) lock_and_load && run_hooks power false;;
+     --help) help && run_hooks power help;;
+-    '') lock_and_load; on_ac_power && run_hooks power false || run_hooks power true;;
++    '') lock_and_load; _on_ac_power && run_hooks power false || run_hooks power true;;
+     *) help && exit 1;;
+ esac

@@ -1,3 +1,139 @@
+pm-utils (1.4.1-9) unstable; urgency=low
+
+  * Add 26-inhibit-on-right-status.patch: Do not use the exit status of log
+    rather the exit status of the hook thereby allowing inhibit to work.
+    Thanks to Ariel Cornejo for the patch! (LP: #665651, Closes: #633147)
+  * Add 01_xfs_buffer_arguments.patch: pm/power.d/xfs_buffer: Fix wrong
+    argument ordering. Thanks to Andre Draszik for the patch!
+    (LP: #645974)
+  * debian/rules: Remove the journal-commit and readahead scripts. Recent
+    measurements have shown that they do not save any power in different
+    workloads on rotary disks, and in fact increase power usage on SSD.
+    (fd.o #44627, LP: #900923) This also avoids bugs caused by the
+    journal-commit script. (Closes: #625606, LP: #891688)
+  * Add debian/power.d/{pci_devices,usb_bluetooth}: Set USB bluetooth to
+    autosuspend and a safe subclass of PCI devices to low-power mode during
+    powersafe mode. (fd.o #44672, LP: #911325)
+  * Add debian/patches/03-fix-alpm-typo.patch: Fix typo in sata_alpm hook.
+    (fd.o #44676, LP: #900930)
+  * debian/rules: Stop install hal-cd-polling. hal has been obsolete for
+    years, so don't waste cycles for checking for hal. (LP: #898564)
+  * debian/rules: Stop installing sleep.d/49bluetooth, it is not necessary any
+    more with current Linux kernels. (Closes: #623750)
+
+ -- Martin Pitt <mpitt@debian.org>  Mon, 16 Jan 2012 15:55:45 +0100
+
+pm-utils (1.4.1-8) unstable; urgency=low
+
+  * debian/control: Demote "kbd | console-tools" to Recommends. If KMS is
+    used, chvt is no longer required so we only need it as fallback.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 12 Apr 2011 13:24:47 +0200
+
+pm-utils (1.4.1-7) unstable; urgency=low
+
+  * debian/control: Version the laptop-mode-tools conflicts to << 1.55, as
+    from that version on the /usr/lib/pm-utils/power.d/laptop-mode was
+    renamed, thus avoiding the file conflict. (Closes: #612710, LP: #638307)
+
+ -- Martin Pitt <mpitt@debian.org>  Fri, 18 Mar 2011 17:25:56 +0100
+
+pm-utils (1.4.1-6) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Michael Biebl <biebl@debian.org>  Sun, 06 Feb 2011 14:20:32 +0100
+
+pm-utils (1.4.1-5) experimental; urgency=low
+
+  * Add 13-49bluetooth-sync.patch: Wait for btusb module to get unused, so
+    that you can remove it in SUSPEND_MODULES. (LP: #698331)
+  * Add 14-disable-sata-alpm.patch: Disable SATA link power management by
+    default, as it still causes disk errors and corruptions on many hardware.
+    (LP: #539467)
+
+ -- Martin Pitt <mpitt@debian.org>  Tue, 01 Feb 2011 16:11:40 +0100
+
+pm-utils (1.4.1-4) experimental; urgency=low
+
+  * debian/patches/12-fix-intel-audio-powersave-hook.patch
+    - Fix path in intel-audio-powersave hook and the log output.
+      (Closes: #598006). Thanks Florian Kriener for the patch!
+  * Switch to source format 3.0 (quilt)
+    - Add debian/source/format.
+    - Drop quilt from Build-Depends.
+    - Remove /usr/share/cdbs/1/rules/patchsys-quilt.mk include.
+    - Remove debian/README.source.
+    - Move video-quirks to debian/ so they are handled properly by
+      dpkg-source.
+
+ -- Michael Biebl <biebl@debian.org>  Wed, 17 Nov 2010 05:23:08 +0100
+
+pm-utils (1.4.1-3) experimental; urgency=low
+
+  * debian/rules: Remove harddrive power hook, this causes excessive hard disk
+    spindown on a lot of machines. The hdparm package already ships a less
+    aggressive hook (with -B 128 instead of -B 1). (LP: #606706)
+  * debian/control: Bump Standards-Version to 3.9.1 (no changes necessary).
+  * debian/rules: Use dpkg-vendor instead of lsb_release, and drop lsb-release
+    build dependency.
+
+ -- Martin Pitt <mpitt@debian.org>  Fri, 24 Sep 2010 08:44:00 +0200
+
+pm-utils (1.4.1-2) experimental; urgency=low
+
+  [ Matt Zimmerman ]
+  * debian/control: Conflicts/Replaces: laptop-mode-tools, as both ship
+    /usr/lib/pm-utils/power.d/laptop-mode and the changelog below indicates
+    these two packages should not be used together anyway. (LP: #606160)
+
+ -- Martin Pitt <mpitt@debian.org>  Sun, 22 Aug 2010 17:21:49 +0200
+
+pm-utils (1.4.1-1) experimental; urgency=low
+
+  [ Michael Biebl ]
+  * New upstream release. (Closes: #588587)
+    The main improvement is that this ships some generally useful power
+    management hooks by default. Note that this conflicts with similar
+    packages such as laptop-mode-tools or pm-utils-powersave-policy, so you
+    should not enable them and pm-utils at the same time.
+    Current hooks when switching to battery:
+    - [disable_wol] Disable Wake-on-LAN on ethernet cards
+    - [hal-cd-polling] Disable HAL's polling of CD drives for automounting
+      them. Note that this HAL functionality is already obsolete in Debian's
+      current GNOME, but still being used in current KDE and XFCE desktops.
+    - [harddrive] More aggressive harddrive spindown times
+    - [intel-audio-powersave] Put ac97 and hda cards to sleep when inactive.
+    - [journal-commit, xfs_buffer] Delay ext[34]/ext journal/metadata
+      writeback
+    - [laptop-mode] Delay hard disk writeback times of dirty caches, to avoid
+      spin ups
+    - [pcie_aspm] PCI express cards power saving
+    - [readahead] More speculative readahead, at the expense of using more
+      memory
+    - [sata_alpm] Enable SATA link power management
+    - [sched-powersave] Try to use fewer cores on multi-core machines
+    - [wireless] Reduce RX/TX power when idle on some known-working drivers
+      (various Intel chips for now)
+  * video-quirks/*
+    - Update quirks to latest upstream release pm-quirks-20100619.
+  * Drop patches applied upstream
+    - debian/patches/05-inspiron-8600-ati-quirk.patch
+    - debian/patches/08-fix-lock-file-handling.patch
+    - debian/patches/12-man-page-fixes.patch
+  * Refresh and update all patches so they apply cleanly.
+  * debian/control
+    - Demote radeontool to Suggests. The standard Debian/Ubuntu kernels use
+      KMS for radeon which makes this tool obsolete. (Closes: #588768)
+
+  [ Martin Pitt ]
+  * debian/control: Add hdparm Recommends and ethtool/wireless-tools Suggests,
+    for the newly added power saving hooks.
+  * debian/control: Conflicts/Replaces: pm-utils-powersave-policy, superseded
+    by the now integrated power.d hooks.
+
+ -- Michael Biebl <biebl@debian.org>  Tue, 13 Jul 2010 16:24:27 +0200
+
 pm-utils (1.3.0-3) unstable; urgency=low
 
   * debian/control

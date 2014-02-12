@@ -3,9 +3,9 @@
 
 Index: pm-utils/pm/pm-functions.in
 ===================================================================
---- pm-utils.orig/pm/pm-functions.in	2010-02-03 17:14:54.032006940 +0100
-+++ pm-utils/pm/pm-functions.in	2010-02-03 17:15:27.532013645 +0100
-@@ -276,6 +276,28 @@
+--- pm-utils.orig/pm/pm-functions.in	2010-07-05 18:41:41.000000000 +0200
++++ pm-utils/pm/pm-functions.in	2010-07-05 18:51:36.958324785 +0200
+@@ -278,6 +278,28 @@
  check_hibernate() { [ -n "$HIBERNATE_MODULE" ]; }
  check_suspend_hybrid() { [ -n "$SUSPEND_HYBRID_MODULE" ]; }
  
@@ -34,7 +34,7 @@ Index: pm-utils/pm/pm-functions.in
  # allow autodetection of sleep methods
  if [ "$SLEEP_MODULE" = "auto" ]; then
      SLEEP_MODULE="tuxonice uswsusp"
-@@ -293,9 +315,9 @@
+@@ -295,9 +317,9 @@
  	if grep -q mem /sys/power/state; then
  		SUSPEND_MODULE="kernel"
  		do_suspend() { echo -n "mem" >/sys/power/state; }
@@ -43,13 +43,13 @@ Index: pm-utils/pm/pm-functions.in
  		SUSPEND_MODULE="kernel"
 -		do_suspend() { pm-pmu --suspend; }
 +		do_suspend() { do_suspend_pmu; }
- 	fi
- fi
- 
+ 	elif grep -q standby /sys/power/state; then
+ 		SUSPEND_MODULE="kernel"
+ 		do_suspend() { echo -n "standby" >/sys/power/state; }
 Index: pm-utils/pm/module.d/uswsusp
 ===================================================================
---- pm-utils.orig/pm/module.d/uswsusp	2010-02-03 00:34:30.340474179 +0100
-+++ pm-utils/pm/module.d/uswsusp	2010-02-03 17:15:27.544008896 +0100
+--- pm-utils.orig/pm/module.d/uswsusp	2010-07-04 16:42:51.000000000 +0200
++++ pm-utils/pm/module.d/uswsusp	2010-07-05 18:51:36.958324785 +0200
 @@ -66,7 +66,7 @@
  # ended up claiming ownership of a given sleep method.
  if [ -z "$SUSPEND_MODULE" ] && command_exists s2ram && \
