@@ -1,12 +1,482 @@
-commit c3d7dfac7b8dba7c205170ce55428a35eb4d4ce7
-Merge: 2ec6109 0ed2f39
+commit d6aca587e2e9b90f7d0379d5bd4b792ae68fc2cc
 Author: Victor Lowther <victor.lowther@gmail.com>
-Date:   Tue Mar 16 22:05:15 2010 -0500
+Date:   Sun Jul 4 09:51:24 2010 -0500
 
-    Merge branch 'master' into pm-utils-1.3
+    Bump version to 1.4.1
+
+commit dab7a79faf67ad5f33d15cc90b7fa34f61cf4c90
+Author: Tomáš Chvátal <scarabeus@gentoo.org>
+Date:   Sun Jul 4 09:23:26 2010 -0500
+
+    Do not automagically rely on xmlto, include a configure option instead.
     
-    Conflicts:
-    	src/import-fdi-quirkdb.in
+    Thanks, Tomáš!
+
+commit 87883a1cc89618b5a985a9c78f8234fc1570c54c
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Tue Jun 22 19:09:40 2010 -0500
+
+    Make on_ac_power check sysfs directly.
+    
+    This avoids us depending on power managers that depend on us.
+
+commit 0326034188bfd6943c4958775b7b18e701c3c0ca
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 19 18:31:12 2010 -0500
+
+    Update configure.ac to 1.4.0
+
+commit 9b06ee14de8ec8e72d7c1c12d380fcca609caa73
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 19 18:20:14 2010 -0500
+
+    Oops, stop worrying about disabling wake on lan for wireless.
+
+commit 646a20af9b48d1bb4630f237a345e82ffb2921b5
+Merge: 1fd247d 79dde6f
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 19 18:10:00 2010 -0500
+
+    Merge remote branch 'UPSTREAM/pm-utils-1.4' into pm-utils-1.4
+
+commit 1fd247d087ed73896d2b2156039dff2a353f6db6
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 19 18:08:19 2010 -0500
+
+    Fix stupid error in sata_alpm
+
+commit 79dde6f2f7bb620b163981ec7a7b995c9c9d1b0e
+Author: Michael Biebl <mbiebl@gmail.com>
+Date:   Fri Jun 18 15:15:16 2010 +0200
+
+    Use flock for more robust lock file handling
+    
+    Debian-Bug: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=568565
+
+commit 8e63749b7ec708df9ea21cde0b99d060e71dbb9a
+Author: Michael Biebl <mbiebl@gmail.com>
+Date:   Fri Jun 18 08:09:56 2010 +0200
+
+    Various small man page updates and fixes
+
+commit 2cf0e870ceac51b9f1c706d15f775f8a050680cd
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Tue Jun 15 07:07:45 2010 -0500
+
+    Bump to pm-utils-1.4.0-rc2
+
+commit ef1e0968b93d2e3425183e6f18747082b5c3a7c5
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Tue Jun 15 07:03:22 2010 -0500
+
+    Added informative messages to some of the sleep hooks.
+
+commit cb0ad2d4e13972810ebbe2a979b5cb37d740149a
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 15:10:52 2010 -0500
+
+    Make powersave hooks a little more verbose.
+
+commit b540f8f5c4fffad793d0a4938feb80d6f1f04c18
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 15:29:42 2010 -0500
+
+    Change hook run printing to make it not look ugly.
+    
+    Hooks can print things too.
+
+commit b9909dfe65f41eceaf771a7f0caa852fab2839e2
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 13:25:24 2010 -0500
+
+    Fix some thinkos introduced by the wireless hooks changes.
+    
+    Among other things, we were not actually enabling power management
+    for wireless adaptors.  We are now.
+
+commit 1afc0d335b5a55c770ebe12bfe8604a12ca24753
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 10:29:20 2010 -0500
+
+    Oops, missed some Makefile.am updates.
+
+commit b5abeba798d406c1a2b9667966768223b890f19b
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 08:15:30 2010 -0500
+
+    Add a hook to disable polling optical media while on battery.
+
+commit f81a0b13ebd8f6e0f3c3d0ed71e243cf10f0a7f7
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 07:34:59 2010 -0500
+
+    import-fdi-quirkdb was only ever a temporary hack.
+    
+    Now that we handle the quirk database, it goes byebye.
+
+commit aef6bd0834ba098fa4692ee61823a59cfdf0e63f
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 07:25:25 2010 -0500
+
+    Fix a typo in README.distributions.
+
+commit 7fa3d26ccdc5639a2b99da3d758d0dca6dc56a2c
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 07:23:32 2010 -0500
+
+    Update README.debugging.
+
+commit 257b46f303e1b896cbd8f9b64af92af3857a3f61
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 14 07:19:35 2010 -0500
+
+    Update TODO file
+
+commit 984f135ca4140f5f17dee14c0a9bd06a85ca5f82
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 12 09:53:56 2010 -0500
+
+    Update NEWS.
+
+commit 31cc0a75f5dbe7bc2d372a9223dcf4a635a73201
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 12 09:28:27 2010 -0500
+
+    The power management stuff deserves its own branch.
+
+commit a4e4b0ce456c66d01d9c5f09a73242d2db6c65e9
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 12 13:07:51 2010 -0500
+
+    Update git tree packaging to conflict with laptop-mode-tools
+    
+    The new powermanagement scripts conflict with laptop-mode-tools.
+    Make sure both are not installed at the same time.
+
+commit cbb1de4dd5c79641169316e232b630662ecbf46f
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 12 12:52:36 2010 -0500
+
+    Add more specificity to the wireless hook.
+    
+    Explicity handle Intel wireless cards according to their unique requirements.
+    If only iwconfig power on/off did The Right Thing on all the cards.
+
+commit eaebe53f016fb1a875a13de225b1d9d4e2db197c
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 11 07:25:09 2010 -0500
+
+    Update provides= line in PKGBUILD to privide version 9999
+
+commit 9b059c01da46c12d026002ebaeb5a3c0cdd59a78
+Author: Chase Douglas <chase.douglas@canonical.com>
+Date:   Tue Jun 8 14:57:13 2010 -0400
+
+    Fix paths for sched_powersave script
+    
+    The paths had a leading stray '$' and the hyperthreading path was
+    incorrect.
+    
+    Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit c97842b99029e81c138744f34f05746e7309a611
+Author: Chase Douglas <chase.douglas@canonical.com>
+Date:   Tue Jun 8 14:47:26 2010 -0400
+
+    Fix audio powersave script to look for snd_* modules
+    
+    Without this change the snd_hda_intel module is skipped.
+    
+    Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit e2ea60907ca2b30e1ac5744d3e17dff16ed910ce
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Jun 9 05:23:57 2010 -0500
+
+    Refuse to change sata link pm states on kernels < 2.6.33
+    
+    Kernels earlier then 2.6.33 have a bug that can cause filesystem corruption
+    due to the upper layers aborting a transaction instead of retrying it if the
+    sata link glitches out momentarily during a power state transition.
+
+commit 4eaf130c73b3234ed980866ce54a311407accf36
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 5 14:09:07 2010 -0500
+
+    Oops, forgot to add service script into the ight Makefile.am.
+
+commit 12a931d4db8258049c5d619bb99f4f58ef600de1
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 5 13:52:24 2010 -0500
+
+    There are no actual users of chassis_type anymore, get rid of it.
+
+commit 58a67a9cbb8637c8cfe4ea06d5d956af0704f498
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 4 11:56:11 2010 -0500
+
+    Add help functionality to pm-powersave
+
+commit 32b72f406ad5bf92dddb2092082891f8225618f4
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 4 11:31:48 2010 -0500
+
+    Update Makefile.am to include new hooks.
+
+commit 27bf3ee21864ff27b3b9de47dbf101179e1b2434
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 4 12:53:04 2010 -0500
+
+    Update help text for powersave hooks that display help.
+
+commit a69b163aa760013e5a72327e43f8ef0f21226012
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 4 09:38:31 2010 -0500
+
+    Add wakeonlan and pcie aspm powersave hooks.
+
+commit 21558e0ceb21620ac78f5ef81f937a404fa1abb1
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 4 08:18:31 2010 -0500
+
+    Add support for ext4 filesystems in journal_commit.
+    
+    Also force pm-utils to disable powersaving features across a suspend/resume.
+
+commit 381ff7b01f459e5767d927386dad48e52d2c5f02
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Thu Jun 3 16:30:32 2010 -0500
+
+    Add sata_alpm control hook.
+
+commit 43e64366c2c5c9831c041fb571bf7e92ad3598c2
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Thu Jun 3 15:53:24 2010 -0500
+
+    Add help and configurability to most of the powersave hooks.
+
+commit ded3b131f51ba3aa64536019c4bfb0cb7a0df58b
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Jul 23 21:29:27 2008 -0500
+
+    Added powersave hook to change journal commit interval
+
+commit a262ed4c23199e6c42c19dd6fea423d72b78a15a
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jul 5 11:41:27 2008 -0500
+
+    Make sure that we are root before trying to run dmidecode.
+
+commit 6ff56aa5ec0aa5756162e60b26fd3cbdfb8abcfa
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Jun 30 19:08:44 2008 -0500
+
+    Make laptop-mode, readahead, and xfs_buffer only apply
+    when we are running on something that looks like a laptop.
+    
+    "looks like a laptop" = dmidecode says that chassis type is Portable.
+
+commit 2a09b333c3096cfb0d361a983a4c479c4d54ed09
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sun Jun 29 12:07:22 2008 -0500
+
+    More comments to the power hooks.
+    
+    Also added an environment variable that will (hopefully) tell us
+    what type of system we have.
+
+commit 58379d77e02e7ed3e4d61757358fb88d7f98413a
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sun Jun 29 11:57:55 2008 -0500
+
+    Added comments to intel-audio-powersave and wireless
+
+commit 69922741b43bfcee13677ae5dce16fa274f53a9e
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sun Jun 29 11:42:16 2008 -0500
+
+    Rewrote the sched-powersave hook to eliminate redundancy.
+
+commit b58b6ef7c254bf46b0cfb909070bfb5028ac05ce
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sun Jun 29 10:40:14 2008 -0500
+
+    Power management for a couple of other subsystems
+
+commit 8aae17379df8772e46b0f28fdb4d3e974f65ad54
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 28 23:25:11 2008 -0500
+
+    Added some explanatory comments to the power hooks.
+
+commit 6662c9f80bc8e914e826a009cdf0755d442687c8
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Jun 28 11:38:28 2008 -0500
+
+    Richard raised concerns about hard drive spindown.
+    
+    So the harddrive hook no longer tries to spin the drive down pending
+    some sort of consensus on the right thing to do to make the hard drive
+    save power.
+    
+    In the mean time, though, just flat-out disable write caching on the
+    hard drive.  I know that there are barriers and flushes that the ATA layer
+    uses to ensure that data really is written to the disk, but hard drive cache
+    isn't battery backed.
+
+commit 1ab9f81812861c9fbab59c53a1fd50b3077d6a0f
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 27 20:02:58 2008 -0500
+
+    Added basic laptop mode support to power.d
+
+commit 9612398e36335b0358b4585ab6edd5589f9d129e
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Jun 4 11:13:06 2010 -0500
+
+    Add PKGBUILD for rudimentary Arch Linux support
+
+commit a4028ade02a01aff35d4968bfaeebe0748d1be98
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon May 31 18:52:19 2010 -0500
+
+    Autodetect sleep modules by default instead of forcing the kernel one.
+
+commit ad43a44d2f373a111c3912c4e5f65a43ab3cf65b
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon May 31 18:28:28 2010 -0500
+
+    Make tuxonice methods chvt if using a userspace UI.
+    
+    Since we do not always chvt away from X before actually hibernating,
+    things may get nasty if both X and the userspace UI start drawing.
+
+commit b669f97fd18d6de49c6b6d6a28b77d6ecb321a5f
+Author: Dylan Smith <dylan.ah.smith@gmail.com>
+Date:   Mon May 31 14:04:29 2010 -0500
+
+    Try falling back to standby suspend of mem is not available.
+    
+    It saves less power, but is the only option available on some systems.
+    
+    Thanks, Dylan Smith.
+
+commit 619a0a8980c6e7294ac303da7ca3b2298fbe919e
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Apr 12 22:07:54 2010 -0500
+
+    Make service command executable.
+
+commit ed34802c8d538ff45cb35c726d7a6a53e66c9ec2
+Author: Paul Menzel <paulepanter@users.sourceforge.net>
+Date:   Mon Apr 12 15:04:01 2010 +0200
+
+    README.native-quirk-db: Typo. s/though/through/
+    
+    Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+commit 0e58d64382a4efd2b1140f1fb1b3cf19043f1dd4
+Merge: a1d9fde ddad23a
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Apr 12 22:00:09 2010 -0500
+
+    Merge remote branch 'UPSTREAM/master'
+
+commit a1d9fde306aee2d65f83c0225c65a31b5d417e10
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Mon Apr 12 21:57:23 2010 -0500
+
+    Add comments to the service command.
+
+commit c66c6f15f1ef15741842b4e573bcd9dfb28a7528
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sun Apr 11 14:59:50 2010 -0500
+
+    Create a pm-utils local service command for distros that do not have one.
+
+commit 68104102c9d1659183fc0ad998274602802c6b41
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Apr 10 15:20:48 2010 -0500
+
+    Modify make-deb to not bother with checking out the debian branch since we merged it into
+    master
+
+commit 6bc4f4eeed002182bd4e39ee11fc024ceaf73757
+Merge: 81628f1 e1fd7e6
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Sat Apr 10 15:19:05 2010 -0500
+
+    Merge branch 'debian'
+
+commit ddad23ae577a712489abbdd7e997ce4a551ea838
+Author: Chase Douglas <chase.douglas@canonical.com>
+Date:   Fri Mar 19 17:36:14 2010 -0400
+
+    Load hook blacklist for power.d hooks
+    
+    Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+    Signed-off-by: Dan Nicholson <dbn.lists@gmail.com>
+
+commit 81628f159aa583bdba480f0537020700b3d2fb52
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Mar 19 09:15:01 2010 -0500
+
+    Move .spec.in file into master.
+    
+    We no longer require the rpm branch, and will drop it.
+
+commit e8d0b58a9df080f021d04b4c2d358003974092f3
+Author: Michal Schmidt <mschmidt@redhat.com>
+Date:   Tue Feb 23 14:57:05 2010 +0100
+
+    on_ac_power: support UPower (new name for DeviceKit-power)
+    
+    DeviceKit-power got renamed to UPower and its D-Bus interface changed
+    accordingly.
+    
+    Try UPower first in on_ac_power.
+    If it fails, try DeviceKit-power.
+    It if fails too, try hal.
+    
+    Also update documentation.
+    
+    Signed-off-by: Michael Biebl <mbiebl@gmail.com>
+
+commit b010efe88f668e961a4b5f99480041c3408e81b8
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Mar 17 15:21:55 2010 -0500
+
+    Oops, make-rpm should be executable.
+
+commit 5315e7c7aa23b50a7a54061c91cf5ed544607b58
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Mar 17 15:19:20 2010 -0500
+
+    Move make-rpm from the rpm branch to here
+
+commit 6a0f687919da4465e3b76d6947e4fde46d092194
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Mar 17 15:11:30 2010 -0500
+
+    Move files instead of copyingthem when cleaning up.
+
+commit 1e9751039b6d96df6c3ea870982d092d2f69c339
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Mar 17 15:06:50 2010 -0500
+
+    Clean up after ourselves properly
+
+commit e1fd7e66d35ded2a30af3b3a1f942d2e91599850
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Mar 17 14:56:28 2010 -0500
+
+    Mokve make-deb to the master branch
+
+commit e950b5ffe18ad36f14acaec554becf9795233f0d
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Mar 17 14:55:11 2010 -0500
+
+    Move make-deb script from the debian branch to here.
 
 commit 0ed2f3950e4797c592d89dcbe9d2bc194e560a2c
 Author: Victor Lowther <victor.lowther@gmail.com>
@@ -17,14 +487,6 @@ Date:   Sun Mar 14 23:11:39 2010 -0500
     Magic foo_outof regex munging code was not working due to a deplorable lack of extglob.
     Compaq biosen have some truly hideous identifiers.
     Hmmm... lenovo fdi file seems to use slightly looser XML.
-
-commit 2ec6109275a7ff6b3aa859c9981299e85ff68173
-Author: Victor Lowther <victor.lowther@gmail.com>
-Date:   Sun Mar 14 23:11:39 2010 -0500
-
-    Fix import-fdi-quirkdb
-    
-    Magic foo_outof regex munging code was not working due to a deplorable lack of extglob.
 
 commit ff649497ad05fc7a7e7a2d33f7e91174f61da5ac
 Author: Victor Lowther <victor.lowther@gmail.com>
@@ -1289,6 +1751,12 @@ Date:   Wed Jul 23 08:04:16 2008 -0500
 
     Missed a close brace
 
+commit 6f9cf1aa9780a1413ab16f71bae1cb27ae0ae8a2
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Wed Jul 23 07:59:50 2008 -0500
+
+    Depend on xmlto instead of docbook-utils when building
+
 commit 3fec4c5c285fcb0eaad6de6dae3c4132e860944e
 Merge: 6ec54f8 6aea272
 Author: Victor Lowther <victor.lowther@gmail.com>
@@ -2173,6 +2641,46 @@ Date:   Fri Mar 28 15:44:43 2008 +0100
     Improve PMU check
     
     Test if /dev/pmu is a character device.
+
+commit 30a3fcd9304b9de89800cf5cb23544ae2e6605a0
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Mar 21 21:23:42 2008 -0500
+
+    Added README.debian-branch
+    
+    This file explains howto use the debian branch to create a .deb, and what
+    sort of changes should be committed to debian (short version: nothing unless
+    you know what you are doing.  Really.)
+
+commit 00111ca8a48ede852ff6498e986bac4722047ebf
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Fri Mar 21 20:09:38 2008 -0500
+
+    We no longer need to copy the .deb out of the way.
+
+commit 4eace1a370b8af7f71e3de8f2155c2ffd77d804d
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Thu Mar 20 23:32:12 2008 -0500
+
+    Try again at this make deb thing.
+
+commit 199a64dc0c680064635d591d39eb11420c828662
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Thu Mar 20 23:27:36 2008 -0500
+
+    Get rid of unneeded automake machinery.
+
+commit 92458c3197b6f8101419ddbb813d5c8875763a76
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Thu Mar 20 23:20:13 2008 -0500
+
+    Added a make-deb script to replce the patched test-pm-utils script.
+
+commit dfbfe5e573eb64c1f346bf24bccf19c0a7b9c0d1
+Author: Victor Lowther <victor.lowther@gmail.com>
+Date:   Thu Mar 20 23:11:16 2008 -0500
+
+    Make the debian stuff its own semidetached head.
 
 commit bf5f55f5b5ec375ac1b0b565011b8bf9d0ccf178
 Author: Victor Lowther <victor.lowther@gmail.com>

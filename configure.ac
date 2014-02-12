@@ -1,5 +1,5 @@
 AC_PREREQ(2.52)
-AC_INIT(pm-utils, 1.3.0)
+AC_INIT(pm-utils, 1.4.1)
 AC_CONFIG_SRCDIR(src)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 AM_CONFIG_HEADER(config.h)
@@ -8,28 +8,28 @@ AC_PROG_CC
 AC_PROG_LN_S
 
 dnl ---------------------------------------------------------------------------
-dnl - Extra verbose warning switches
-dnl ---------------------------------------------------------------------------
-CPPFLAGS="$CPPFLAGS -Wall -Werror"
-
-dnl ---------------------------------------------------------------------------
-dnl - Debugging switches
-dnl ---------------------------------------------------------------------------
-CPPFLAGS="$CPPFLAGS -g"
-
-dnl ---------------------------------------------------------------------------
 dnl - Manual page build
 dnl ---------------------------------------------------------------------------
-AC_PATH_PROG(XMLTO, xmlto, no)
-AM_CONDITIONAL(HAVE_XMLTO, [test "x$XMLTO" != xno])
-
-dnl ---------------------------------------------------------------------------
-dnl - Make paths available for source files
-dnl ---------------------------------------------------------------------------
-AC_SUBST(SYSCONFDIR, $sysconfdir)
-AC_SUBST(DATADIR, $datadir)
-AC_SUBST(BINDIR, $bindir)
-AC_SUBST(SBINDIR, $sbindir)
+AC_ARG_ENABLE([doc],
+	AC_HELP_STRING([--disable-docs],
+		[Disable manpage generating via xmlto [[default=auto]]]),
+	[MAN="$enableval"],
+	[MAN=auto])
+	AC_PATH_PROG(XMLTO, xmlto, no)
+	AS_IF([test "x$MAN" = "xyes"],
+	[
+		AS_IF([test "x$XMLTO" = "xno"],
+			[AC_MSG_ERROR([Manpage generating requested but xmlto not found.])
+		])
+	],
+	[test "x${MAN}" != "xno"],
+	[
+		AS_IF([test "x$XMLTO" != "xno"],
+			[MAN="yes"],
+			[MAN="no"])
+	])
+AM_CONDITIONAL(HAVE_XMLTO, [test "x$MAN" != xno])
+AC_MSG_RESULT([checking whether to build manpages... $MAN])
 
 dnl ---------------------------------------------------------------------------
 dnl - Makefiles, etc.

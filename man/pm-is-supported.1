@@ -31,22 +31,22 @@ command\&.
 .PP
 The intended purpose of
 \fBpm\-is\-supported\fR
-is to find out which power management modes are supported by the system\&. hald(8) will call it to do just that\&. (Note that DeviceKit\-power does not use this\&.)
+is to find out which power management modes are supported by the system\&. hald(8) will call it to do just that\&. (Note that UPower does not use this\&.)
 .SH "OPTIONS"
 .PP
 \fB\-\-suspend\fR
 .RS 4
-Is suspend supported? Suspend is a state where most devices are shutdown, except for RAM\&. This state still draws power\&.
+Test whether suspend is supported\&. Suspend is a state where most devices are shutdown, except for RAM\&. This state still draws power\&.
 .RE
 .PP
 \fB\-\-hibernate\fR
 .RS 4
-Is hibernate supported? During hibernate the state of the system is saved to disk, the system is fully powered off\&.
+Test whether hibernate is supported\&. During hibernate the state of the system is saved to disk, the system is fully powered off\&.
 .RE
 .PP
 \fB\-\-suspend\-hybrid\fR
 .RS 4
-Is hybrid\-suspend supported? Hybrid\-suspend is the process where first the state of the system is saved to disk \-\- just like with hibernate \-\- but instead of poweroff, the system goes in suspend state, which means it can wakeup quicker than for normal hibernation\&. The advantage over suspend is that you can resume even if you run out of power\&. s2both is a hybrid\-suspend implementation\&.
+Test whether hybrid\-suspend is supported\&. Hybrid\-suspend is the process where first the state of the system is saved to disk \-\- just like with hibernate \-\- but instead of poweroff, the system goes in suspend state, which means it can wakeup quicker than for normal hibernation\&. The advantage over suspend is that you can resume even if you run out of power\&. s2both is a hybrid\-suspend implementation\&.
 .RE
 .SH "RETURN VALUE"
 .PP
@@ -73,10 +73,10 @@ T}
 .SH "SEE ALSO"
 .PP
 
-\fBDeviceKit-power\fR(7),
 \fBhald\fR(8),
 \fBpm-suspend\fR(8),
-\fBs2both\fR(8)
+\fBs2both\fR(8),
+\fBUPower\fR(7)
 .SH "AUTHOR"
 .PP
 \fBTim Dijkstra\fR <\&tim@famdijkstra\&.org\&>

@@ -10,15 +10,15 @@ pm_pmu_SOURCES = pm-pmu.c
 
 pm_reset_swap_SOURCES = pm-reset-swap.c
 
-pm_bin_SCRIPTS = pm-action
+pm_bin_SCRIPTS = pm-action service
 
 bin_SCRIPTS = pm-is-supported
 
-dist_bin_SCRIPTS = on_ac_power import-fdi-quirkdb
+dist_bin_SCRIPTS = on_ac_power
 
 sbin_SCRIPTS = pm-powersave
 
-script_in_files = pm-action.in pm-is-supported.in pm-powersave.in import-fdi-quirkdb.in
+script_in_files = pm-action.in pm-is-supported.in pm-powersave.in service
 
 CLEANFILES =  $(script_in_files:.in=)
 

@@ -89,7 +89,7 @@
     <para>
       The intended purpose of <command>&dhpackage;</command> is to
       find out which power management modes are supported by the 
-      system. hald(8) will call it to do just that. (Note that DeviceKit-power
+      system. hald(8) will call it to do just that. (Note that UPower
       does not use this.)
     </para>
   </refsect1>
@@ -104,7 +104,7 @@
 	<term><option>--suspend</option></term>
 	<listitem>
 	  <para>
-	    Is suspend supported? Suspend is a state where
+	    Test whether suspend is supported. Suspend is a state where
 	    most devices are shutdown, except for RAM. This
 	    state still draws power.
 	  </para>
@@ -114,7 +114,7 @@
 	<term><option>--hibernate</option></term>
         <listitem>
 	  <para>
-	    Is hibernate supported? During hibernate the state of the
+	    Test whether hibernate is supported. During hibernate the state of the
 	    system is saved to disk, the system is fully powered off.
 	  </para>
 	</listitem>
@@ -123,7 +123,7 @@
 	<term><option>--suspend-hybrid</option></term>
 	<listitem>
 	  <para>
-	    Is hybrid-suspend supported? Hybrid-suspend is the process
+	    Test whether hybrid-suspend is supported. Hybrid-suspend is the process
 	    where first the state of the system is saved to disk 
 	    -- just like with hibernate -- but instead of poweroff, the 
 	    system goes in suspend state, which means it can wakeup 
@@ -161,10 +161,6 @@
     <!-- In alpabetical order. -->
     <para>
       <citerefentry>
-	<refentrytitle>DeviceKit-power</refentrytitle>
-	<manvolnum>7</manvolnum>
-      </citerefentry>,
-      <citerefentry>
 	<refentrytitle>hald</refentrytitle>
 	<manvolnum>8</manvolnum>
       </citerefentry>,
@@ -175,6 +171,10 @@
       <citerefentry>
 	<refentrytitle>s2both</refentrytitle>
 	<manvolnum>8</manvolnum>
+      </citerefentry>,
+      <citerefentry>
+	<refentrytitle>UPower</refentrytitle>
+	<manvolnum>7</manvolnum>
       </citerefentry>
     </para>
   </refsect1>
