@@ -1,0 +1,15 @@
+Description: Fix typo in wireless hook to make enabled check actually work.
+Author: Whoopie <whoopie79@gmx.net>
+Bug-Ubuntu: https://launchpad.net/bugs/1299975
+
+--- a/pm/power.d/wireless
++++ b/pm/power.d/wireless
+@@ -20,7 +20,7 @@
+     # Skip if not a wireless card.
+     [ -d "/sys/class/net/$1/wireless" ] || return 1
+     # Also don't do anything if the device is disabled
+-    [ "$(cat /sys/class/net/$1/device/enable)" = "1" ] || return 1
++    [ "$(cat /sys/class/net/$1/device/enabled)" = "1" ] || return 1
+     driver="$(readlink "/sys/class/net/$1/device/driver")"
+     driver=${driver##*/}
+     case $driver in

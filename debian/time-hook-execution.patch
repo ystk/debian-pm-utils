@@ -1,0 +1,30 @@
+Description: Measure time that hooks take and print them in the log. Also, disable actual suspend call to make hook optimization/measure turnarounds more convenient. This is not applied by default as the date calls themselves add overhead.
+Author: Martin Pitt <martin.pitt@ubuntu.com>
+
+--- old/pm/pm-functions.in
++++ new/pm/pm-functions.in
+@@ -196,10 +196,13 @@
+ 	# $1 = hook to run
+ 	# rest of args passed to hook unchanged.
+ 	log "Running hook $*:"
++	t_start=`date +%s.%N`
+ 	hook_ok "$1" && "$@"
+ 	# log() changes the return value, so save it for later
+ 	local status=$?
+-	log ""
++	t_end=`date +%s.%N`
++	time=`echo $t_end - $t_start | bc -l`
++	log "($time s)"
+ 	log -n "$*: " 
+ 	hook_exit_status $status && LAST_HOOK="${1##*/}" || inhibit
+ }
+@@ -318,7 +321,8 @@
+ if [ -z "$SUSPEND_MODULE" ]; then
+ 	if grep -q mem /sys/power/state; then
+ 		SUSPEND_MODULE="kernel"
+-		do_suspend() { echo -n "mem" >/sys/power/state; }
++		#do_suspend() { echo -n "mem" >/sys/power/state; }
++		do_suspend() { log "Would suspend now"; }
+ 	elif [ -c /dev/pmu ] && check_suspend_pmu; then
+ 		SUSPEND_MODULE="kernel"
+ 		do_suspend() { do_suspend_pmu; }

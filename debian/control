@@ -4,18 +4,16 @@ Priority: optional
 Maintainer: Tim Dijkstra <tim@famdijkstra.org>
 Uploaders: Michael Biebl <biebl@debian.org>, Martin Pitt <mpitt@debian.org>
 Build-Depends: cdbs, debhelper (>= 7), xmlto
-Standards-Version: 3.9.1
-Vcs-Git: git://git.debian.org/git/collab-maint/pm-utils.git
-Vcs-Browser: http://git.debian.org/?p=collab-maint/pm-utils.git;a=summary
+Standards-Version: 3.9.5
+Vcs-Git: git://anonscm.debian.org/collab-maint/pm-utils.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/pm-utils.git
 Homepage: http://pm-utils.freedesktop.org/
 
 Package: pm-utils
 Architecture: all
 Depends: ${misc:Depends}, powermgmt-base
-Recommends: vbetool, procps, hdparm, kbd | console-tools
-Suggests: cpufrequtils, wireless-tools, ethtool, radeontool
-Conflicts: pm-utils-powersave-policy, laptop-mode-tools (<< 1.55)
-Replaces: pm-utils-powersave-policy, laptop-mode-tools (<< 1.55)
+Recommends: vbetool, procps, hdparm, ethtool, kbd | console-tools
+Suggests: cpufrequtils, wireless-tools, radeontool
 Description: utilities and scripts for power management
  This package provides simple shell command line tools to suspend and
  hibernate your computer.

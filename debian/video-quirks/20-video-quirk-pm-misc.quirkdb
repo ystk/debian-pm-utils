@@ -387,3 +387,10 @@ match system.hardware.vendor regex ^ZEPTO$
   endmatch
  endmatch
 endmatch
+match system.hardware.primary_video.vendor compare_eq 0x15ad
+ match system.hardware.primary_video.product compare_eq 0x0405
+  match system.hardware.primary_video.driver compare_eq vmwgfx
+    addquirk --quirk-none
+  endmatch
+ endmatch
+endmatch

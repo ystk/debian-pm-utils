@@ -3,7 +3,7 @@ match system.hardware.vendor regex ^Sony Corporation$
  match system.hardware.product regex ^VGN-FS115Z$
   addquirk --quirk-s3-mode
  endmatch
- match system.hardware.product regex VGN-FS730|PCG-FX405|VGN-C2S_G|VGN-B1XP|VGN-FE21B|VGN-B100B||VGN-B1VP
+ match system.hardware.product regex VGN-FS730|PCG-FX405|VGN-C2S_G|VGN-B1XP|VGN-FE21B|VGN-B100B|VGN-B1VP
   addquirk --quirk-s3-bios
  endmatch
  match system.hardware.product regex ^(VGN-FS115B|VGN-C140G|VGN-TX3XP_L|VGN-T250P|VGN-AR31S|PCV-RX612|VGN-FS485B|VGN-SZ61XN_C|VGN-TZ37|VGN-TZ170N|VGN-FS920|VGN-C240E|PCG-FX601|VGN-SR11M)$
@@ -28,7 +28,7 @@ match system.hardware.vendor regex ^Sony Corporation$
   addquirk --quirk-vbemode-restore
   addquirk --quirk-vbestate-restore
  endmatch
- match system.hardware.product regex PCG-Z1RMP|VGN-TX770P|VGN-FW11|VGN-TX670P|PCG-V505ECP
+ match system.hardware.product regex PCG-Z1RMP|VGN-TX770P|VGN-FW11|VGN-TX670P|PCG-V505ECP|PCG-Z1RCP
   addquirk --quirk-vbe-post
   addquirk --quirk-vbemode-restore
  endmatch

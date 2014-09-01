@@ -1,3 +1,89 @@
+pm-utils (1.4.1-15) unstable; urgency=medium
+
+  * laptop-mode: If there is no state file (such as at boot), don't overwrite
+    /proc/sys/vm/ values with fixed kernel defaults, simply do nothing. This
+    allows sysctl.conf to set these values. Thanks to Osamu Aoki!
+    (Closes: #659260)
+  * Add 17-fix-wireless-hook.patch: Fix typo in wireless hook to make enabled
+    check actually work. Thanks to Whoopie! (LP: #1299975)
+
+ -- Martin Pitt <mpitt@debian.org>  Thu, 10 Jul 2014 14:58:31 +0200
+
+pm-utils (1.4.1-14) unstable; urgency=medium
+
+  * Fix 16-no-powersave-before-suspend.patch to actually suppress the action
+    on ARM. Thanks to Steven Noonan for pointing this out.
+
+ -- Martin Pitt <mpitt@debian.org>  Wed, 07 May 2014 11:43:03 +0200
+
+pm-utils (1.4.1-13) unstable; urgency=low
+
+  [ Martin Pitt ]
+  * debian/sleep.d/50unload_alx: Unload the alx module during suspend.
+    (LP: #1173952)
+  * Drop obsolete debian/pm-utils.preinst.
+  * Drop obsolete Conflicts/Replaces to pm-utils-powersave-policy and
+    laptop-mode-tools.
+  * debian/copyright: Move to copyright format 1.0.
+  * Move to canonical Vcs-* fields (anonscm.debian.org).
+  * Bump to Standards-Version 3.9.5.
+
+  [ Hao-Ran Liu ]
+  * Add 28-suspend-hybrid.patch: Support in-kernel hybrid suspend
+    (Linux >= 3.6) (LP: #1172692)
+
+ -- Martin Pitt <mpitt@debian.org>  Wed, 06 Nov 2013 09:26:45 +0100
+
+pm-utils (1.4.1-12) unstable; urgency=low
+
+  * debian/video-quirks/20-video-quirk-pm-misc.quirkdb: Don't apply quirks for
+    the vmwgfx driver to fix suspend in VMWare. Thanks  Jakob Bornecrantz!
+    (fd.o #70056, LP: #1234424)
+  * debian/video-quirks/20-video-quirk-pm-sony.quirkdb: Add quirk for SONY
+    Vaio Z1-RCP, thanks Yan Li! (Closes: #625805)
+  * Add 05-uswsusp-hibernate-mode.patch: Check HIBERNATE_MODE in uswsusp
+    module. Thanks Vadim Solomin! (Closes: #589553)
+  * Add 27-run-hook-logging.patch: In suspend log, put empty line after
+    running the hook, not in between. Thanks Dominique Brazziel!
+    (Closes: #661168)
+
+ -- Martin Pitt <mpitt@debian.org>  Wed, 09 Oct 2013 07:49:49 +0200
+
+pm-utils (1.4.1-11) unstable; urgency=low
+
+  * Add 04-ignore-led-failure.patch: Some Lenovo Thinkpad models don't have a
+    suspend LED, don't break suspend over this. Thanks Adam Lee!
+  * Bump Standards-Version to 3.9.4 (No changes necessary).
+
+ -- Martin Pitt <mpitt@debian.org>  Tue, 02 Jul 2013 06:38:25 +0200
+
+pm-utils (1.4.1-10) unstable; urgency=low
+
+  * debian/rules: Stop installing sleep.d/55NetworkManager. Current
+    NetworkManager does not even expose this API any more, so the
+    sleep()/wake() calls just always fail. As NM is apparently able to deal
+    with suspends just fine, no need to waste cycles on this.
+  * Drop 90-nm-proper-wakeup.patch: Obsolete with above change.
+  * Add debian/time-hook-execution.patch: Measure time that hooks take and
+    print them in the log. Also, disable actual suspend call to make hook
+    optimization/measure turnarounds more convenient. This is not applied by
+    default as the date calls themselves add overhead; just keep it in the
+    source package for future use.
+  * Add 15-video_quirks_on_x86_only.patch: Only run the video quirk handlers
+    on x86 and x86_64, as they are quite expensive.
+  * Add 16-no-powersave-before-suspend.patch: Calling pm-powersave before
+    pm-suspend is very slow, it. e. g. takes > 1.5 seconds on a Nexus 7. This
+    does not nearly compensate the potentially slightly slower suspend
+    operation in low power mode, so disable it.
+  * Drop the "shopt" bashism from 15-video_quirks_on_x86_only.patch which
+    somehow slipped in there. (LP: #1091824)
+  * Lift ethtool suggests to recommends, to make disable_wol work in a default
+    installation. (LP: #1081785)
+  * 20-video-quirk-pm-sony.quirkdb: Fix '||' typo, leading to suspend failure
+    on Vaios. (Closes: #561877)
+
+ -- Martin Pitt <mpitt@debian.org>  Mon, 01 Jul 2013 07:46:04 +0200
+
 pm-utils (1.4.1-9) unstable; urgency=low
 
   * Add 26-inhibit-on-right-status.patch: Do not use the exit status of log
